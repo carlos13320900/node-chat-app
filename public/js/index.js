@@ -1,18 +1,13 @@
 var socket = io();
 
-socket.on('connect', () => {
+socket.on('connect', function () {
     console.log('Connected to server');
-
-    socket.emit('createMessage', {
-        from: 'client@example.com',
-        text: 'Hello from the client side'
-    });
 });
 
 socket.on('newMessage', function (email) {
     console.log('New message:', email);
 });
 
-socket.on('disconnect', () => {
+socket.on('disconnect', function () {
     console.log('Disconnected from server');
 });
