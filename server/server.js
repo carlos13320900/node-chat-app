@@ -15,6 +15,16 @@ app.use(express.static(publicPath));
 io.on('connection', socket => {
     console.log('New user connected');
 
+    socket.emit('newMessage', {
+        from: 'backend@example.com',
+        text: 'Hello from the backend',
+        createdAt: 123
+    });
+
+    socket.on('createMessage', message => {
+        console.log('New message:', message);
+    });
+
     socket.on('disconnect', () => {
         console.log('User was disconnected');
     });
@@ -23,7 +33,3 @@ io.on('connection', socket => {
 server.listen(port, () => {
     console.log(`Server is up on port ${port}`);
 });
-
-// app.listen(port, () => {
-//     console.log(`Server is up on port ${port}`);
-// });
