@@ -13,27 +13,43 @@ var io = socketIO(server);
 
 app.use(express.static(publicPath));
 
+/**
+* @WEBSOCKET_ON
+*/
 io.on('connection', socket => {
     console.log('New user connected');
 
+    /** @region_snippet_WelcomeMessage */
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
+    /** @endregion */
 
+    /** @region_snippet_NewUserJoined */
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
+    /** @endregion */
 
+    /** @regions_snippet_CreateMessage */
     socket.on('createMessage', (message, callback) => {
         io.emit('newMessage', generateMessage(message.from, message.text));
-        callback('This is from server');
+        callback();
     });
+    /** @endregion */
 
+    /** @region_snippet_SendLocation */
     socket.on('createLocationMessage', coords => {
       io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
     });
+    /** @endregion */
 
+    /** @region_snippet_UserDisconnect */
     socket.on('disconnect', () => {
         console.log('User was disconnected');
     });
+    /** @endregion */
 });
 
+/**
+* @SERVER_LISTEN
+*/
 server.listen(port, () => {
     console.log(`Server is up on port ${port}`);
 });

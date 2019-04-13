@@ -2,20 +2,38 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/styles.css" />
     </head>
-    <body>
-        <p>Welcome to the chat app</p>
-        <ol id="messages"></ol>
-        <form id="message-form">
-            <input name="message" type="text" placeholder="Message" />
-            <button>Send</button>
-        </form>
-        <button id="send-location">Send location</button>
+    <body class="chat">
 
-        <!-- REVIEW: #region_snippet_scripts -->
+      <!-- REVIEW: #region_snippet_Sidebar -->
+      <div class="chat__sidebar">
+        <h3>People</h3>
+        <div id="user"></div>
+      </div>
+      <!-- REVIEW: #endregion_Sidebar -->
+
+      <!-- REVIEW: #region_snippet_Main -->
+      <div class="chat__main">
+        <ol id="messages" class="chat__messages"></ol>
+
+        <!-- REVIEW: #region_snippet_Footer -->
+        <div class="chat__footer">
+          <form id="message-form">
+              <input name="message" type="text" placeholder="Message" autofocus autocomplete="off" />
+              <button>Send</button>
+          </form>
+          <button id="send-location">Send location</button>
+        </div>
+        <!-- REVIEW: #endregion_Footer -->
+
+      </div>
+      <!-- REVIEW: #endregion_Main -->
+
+        <!-- REVIEW: #region_snippet_Scripts -->
         <script src="/socket.io/socket.io.js"></script>
         <script src="js/libs/jquery-3.3.0.min.js"></script>
         <script src="/js/index.js"></script>
-        <!-- REVIEW: #endregion -->
+        <!-- REVIEW: #endregion_Scripts -->
     </body>
 </html>
