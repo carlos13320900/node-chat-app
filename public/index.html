@@ -27,6 +27,34 @@
         </div>
         <!-- REVIEW: #endregion_Footer -->
 
+        <!-- REVIEW: #region_snippet_Message -->
+        <script id="message-template" type="text/template">
+          <li class="message">
+            <div class="message__title">
+              <h4>{{ from }}</h4>
+              <span>{{ createdAt }}</span>
+            </div>
+            <div class="message__body">
+              <p>{{ text }}</p>
+            </div>
+          </li>
+        </script>
+        <!-- REVIEW: #endregion_Message -->
+
+        <!-- REVIEW: #region_snippet_LocationMessage -->
+        <script id="location-message-template" type="text/template">
+          <li class="message">
+            <div class="message__title">
+              <h4>{{ from }}</h4>
+              <span>{{ createdAt }}</span>
+            </div>
+            <div class="message__body">
+              <a href="{{ url }}" target="_blank">My current location</a>
+            </div>
+          </li>
+        </script>
+        <!-- REVIEW: #endregion_LocationMessage -->
+
       </div>
       <!-- REVIEW: #endregion_Main -->
 
@@ -34,6 +62,7 @@
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/libs/jquery-3.3.0.min.js"></script>
         <script src="/js/libs/moment.js"></script>
+        <script src="/js/libs/mustache.js"></script>
         <script src="/js/index.js"></script>
         <!-- REVIEW: #endregion_Scripts -->
     </body>
