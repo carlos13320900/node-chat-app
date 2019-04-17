@@ -1,6 +1,6 @@
 var socket = io();
 
-function scrollToBottom() {
+function scrollToBottom () {
   var messages = jQuery('#messages');
   var newMessage = messages.children('li:last-child');
 
@@ -21,7 +21,17 @@ function scrollToBottom() {
 
 /** @region_snippet_Connect */
 socket.on('connect', function () {
-    console.log('Connected to server');
+    var params = jQuery.deparam(window.location.search);
+
+    socket.emit('join', params, function (error) {
+      if (error) {
+        alert(error);
+        window.location.href = '/';
+      }
+      else {
+        console.log('No error');
+      }
+    });
 });
 /** @endregion */
 
@@ -58,6 +68,18 @@ socket.on('newLocationMessage', function (message) {
 /** @region_snippet_Disconnect */
 socket.on('disconnect', function () {
     console.log('Disconnected from server');
+});
+/** @endregion */
+
+/** @region_snippet_UpdateUserList */
+socket.on('updateUserList', function (users) {
+  var ol = jQuery('<ol></ol>');
+
+  users.forEach(function (user) {
+    ol.append(jQuery('<li></li>').text(user));
+  });
+
+  jQuery('#user').html(ol);
 });
 /** @endregion */
 
