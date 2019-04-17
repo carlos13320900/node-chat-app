@@ -43,14 +43,23 @@ io.on('connection', socket => {
 
     /** @region_snippet_CreateMessage */
     socket.on('createMessage', (message, callback) => {
-        io.emit('newMessage', generateMessage(message.from, message.text));
-        callback();
+      var user = users.getUser(socket.id);
+
+      if (user && isRealString(message.text)) {
+        io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+      }
+
+      callback();
     });
     /** @endregion */
 
     /** @region_snippet_SendLocation */
     socket.on('createLocationMessage', coords => {
-      io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
+      var user = users.getUser(socket.id);
+
+      if (user) {
+        io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude));      
+      }
     });
     /** @endregion */
 
@@ -62,6 +71,8 @@ io.on('connection', socket => {
           io.to(user.room).emit('updateUserList', users.getUserList(user.room));
           io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left`));
         }
+
+        console.log(`${user.name} disconnect`);
     });
     /** @endregion */
 });
