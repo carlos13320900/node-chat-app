@@ -6,13 +6,24 @@
     <title>Join | Jocker Chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="icon" href="/assets/favicon.png" />
   </head>
 
   <body class="centered-form">
+
+    <!-- REVIEW: #region_snippet_Form -->
     <div class="centered-form__form">
       <form action="/chat.html">
+
+        <!-- REVIEW: #region_snippet_Title -->
         <div class="form-field">
           <h3>Jocker Chat</h3>
+        </div>
+        <!-- REVIEW: #endregion_Title -->
+
+        <!-- REVIEW: #region_snippet_Fields -->
+        <div class="form-field">
+          <img src="/assets/favicon.png" alt="logo" class="logo centered-image" />
         </div>
         <div class="form-field">
           <label>Display name</label>
@@ -25,8 +36,11 @@
         <div class="form-field">
           <button>Join</button>
         </div>
+        <!-- REVIEW: #endregion_Fields -->
+        
       </form>
     </div>
+    <!-- REVIEW: #endregion_Form -->
   </body>
 
 </html>
